@@ -105,31 +105,23 @@ public:
 		str = B::ch;
 		cout << str;
 		cout << endl;
-
-		/*for (size_t i = 0; i < str.size(); i++)
-		{
-			if (str[i] >= 48 && str[i] <= 57)
-				cout << str[i];
-			else
-				cout << '<' << (int)(str[i] & 255) << '>';*/
 				
-			ifs.open(path);
+		ifs.open(path);
 			
-			if (ifs.is_open())
+		if (ifs.is_open())
+		{
+			while (!ifs.eof())
 			{
-				while (!ifs.eof())
-				{
-					cout << endl << endl;
-					ifs >> str;
-					cout << str << " ";
-				}
+				cout << endl << endl;
+				ifs >> str;
+				cout << str << " ";
 			}
-			else
-			{
-				cout << "\nSorry, I can't find this file." << endl;
-			}
+		}
+		else
+		{
+			cout << "\nSorry, I can't find this file." << endl;
+		}
 	}
-    //ifs.close();
 };
 
 class Child2 : public Child1
@@ -139,15 +131,15 @@ public:
     //constructor---
 	Child2() {};
 	~Child2() {};
-	//destructor---
+    //destructor---
 	
 	void Display()
 	{
-		for (int i = 0; i < B::ch.size(); i++)
+		for (int i = 0; i < str.size(); i++)
 		{
-			cout << bitset<5>(B::ch[i]) << ' ';
+			cout << bitset<5>(str[i]);
 		}
-		cout << endl << B::ch << endl;
+		cout << endl << str << endl;
 	}
 };
 
@@ -156,16 +148,18 @@ int main()
 	B base;
 	Child1 ch1;
 	Child2 ch2;
-
 	B* b1 = &base;
 	Child1* c1 = &ch1;
 	Child2* c2 = &ch2;
-
+	//---------
 	base.Completing();
 	b1->Display();
 	c1->Display();
+	
 	b1->Display();
 	c2->Display();
+	
 	b1->Display();
+	
 	return 0;
 }
